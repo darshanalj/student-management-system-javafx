@@ -14,8 +14,10 @@ public class StudentLogInFormController {
     public TextField txtPassword;
     public TextField txtEmailOrId;
 
-    public void linkRegisterFormOnAction(ActionEvent actionEvent) {
-
+    public void linkRegisterFormOnAction(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/student_registation_form.fxml"))));
+        stage.show();
     }
 
     public void btnLogInOnAction(ActionEvent actionEvent) throws IOException {

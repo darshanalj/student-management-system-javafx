@@ -2,10 +2,14 @@ package controller;
 
 import db.DBConnection;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import model.Student;
 
+import java.io.IOException;
 import java.lang.annotation.Inherited;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +34,10 @@ public class StudentDashboardFormController implements Initializable {
 
     }
 
-    public void btnLogOutOnAction(ActionEvent actionEvent) {
+    public void btnLogOutOnAction(ActionEvent actionEvent)throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/student_login_form.fxml"))));
+        stage.show();
+
     }
 }

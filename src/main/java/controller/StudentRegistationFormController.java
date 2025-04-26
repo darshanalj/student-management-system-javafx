@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 
 public class StudentRegistationFormController implements Initializable {
@@ -30,7 +32,27 @@ public class StudentRegistationFormController implements Initializable {
 
     private String gender = "";
 
-    public void btnRegisterOnAction(ActionEvent actionEvent) {
+    private boolean isValid(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+
+        Pattern p = Pattern.compile(emailRegex);
+
+        return email != null && p.matcher(email).matches();
+
+    }
+
+    public void btnRegisterOnAction(ActionEvent actionEvent) throws IOException {
+        if(!txtPassword.getText().equals(txtConfirmPassword.getText())){
+            new Alert(Alert.AlertType.CONFIRMATION,"invalid confirm password !!").show();
+            return;
+        }
+
+        if(!isValid(txtEmail.getText())){
+            new Alert(Alert.AlertType.CONFIRMATION,"invalid email !!").show();
+            return;
+        }
+
         Student student = new Student(txtId.getText(),txtName.getText(),txtEmail.getText(),txtPassword.getText(),dpDateOfBirth.getValue(),gender);
 
         int id = Integer.parseInt(txtId.getText());
@@ -40,6 +62,9 @@ public class StudentRegistationFormController implements Initializable {
         List<Student> studentList = DBConnection.getInstance().getStudentList();
         studentList.add(student);
 
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/student_login_form.fxml"))));
+        stage.show();
     }
 
     public void btnLogInOnAction(ActionEvent actionEvent) throws IOException {
@@ -50,7 +75,14 @@ public class StudentRegistationFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtId.setText("1");
+        if(DBConnection.getInstance().getStudentList().size()!=0){
+            Student student =  DBConnection.getInstance().getStudentList().get(DBConnection.getInstance().getStudentList().size() - 1);
+            txtId.setText((Integer.parseInt(student.getId())+1)+"");
+
+        }else{
+            txtId.setText("1");
+        }
+
     }
 
     public void rbMaleOnAction(ActionEvent actionEvent) {
