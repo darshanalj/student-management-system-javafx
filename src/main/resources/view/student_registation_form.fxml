@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentRegistationFormController">
+   <children>
+      <TextField fx:id="txtId" editable="false" layoutX="38.0" layoutY="79.0" promptText="id" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#23598b" height="63.0" layoutX="-9.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="616.0" />
+      <Label layoutX="214.0" layoutY="14.0" text="Student Registation" textFill="#fffbfb">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="223.0" layoutY="79.0" promptText="name" />
+      <TextField fx:id="txtPassword" layoutX="38.0" layoutY="126.0" promptText="password" />
+      <TextField fx:id="txtEmail" layoutX="415.0" layoutY="79.0" promptText="email" />
+      <TextField fx:id="txtConfirmPassword" layoutX="223.0" layoutY="126.0" promptText="confirm password" />
+      <DatePicker fx:id="dpDateOfBirth" layoutX="38.0" layoutY="174.0" promptText="date of birth" />
+      <RadioButton fx:id="rbMale" layoutX="348.0" layoutY="178.0" mnemonicParsing="false" onAction="#rbMaleOnAction" text="male" />
+      <RadioButton fx:id="rbFemale" layoutX="424.0" layoutY="178.0" mnemonicParsing="false" onAction="#rbFemaleOnAction" text="female" />
+      <Button layoutX="460.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" text="Register" />
+      <Button layoutX="541.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnLogInOnAction" text="LogIn" />
+      <Label layoutX="274.0" layoutY="178.0" text="gender :-" />
+   </children>
+</AnchorPane>
